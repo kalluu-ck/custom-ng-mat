@@ -10,6 +10,7 @@ export const routes: Routes = [
   {
     path: APP_ROUTE_PATHS.storage.path,
     loadComponent: () => import('../storage/storage').then((m) => m.Storage),
+    loadChildren: () => import('../storage/routes').then((m) => m.routes),
   },
   {
     path: '',

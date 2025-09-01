@@ -1,0 +1,45 @@
+$xs: 4px;
+$sm: 8px;
+$md: 12px;
+$default: 16px;
+$lg: 24px;
+$xl: 32px;
+$xxl: 40px;
+
+.app-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.app-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-gap-xs {
+  gap: $xs;
+}
+
+.app-gap-sm {
+  gap: $sm;
+}
+
+.app-gap-md {
+  gap: $md;
+}
+
+.app-gap-default {
+  gap: $default;
+}
+
+.app-gap-lg {
+  gap: $lg;
+}
+
+.app-gap-xl {
+  gap: $xl;
+}
+
+.app-gap-xxl {
+  gap: $xxl;
+}
