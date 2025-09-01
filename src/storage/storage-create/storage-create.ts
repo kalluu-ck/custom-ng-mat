@@ -6,7 +6,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { APP_ROUTE_PATHS } from '../../app/app.routes';
-import { provideAppDateAdapters } from '../../shared/controls/custom-date-adapter';
 import { STORAGE_ROUTE_PATHS } from '../routes';
 import { StorageData } from '../storage-data';
 
@@ -19,7 +18,6 @@ import { StorageData } from '../storage-data';
     MatInputModule,
     MatButtonModule,
   ],
-  providers: [provideAppDateAdapters()],
   templateUrl: './storage-create.html',
   styleUrl: './storage-create.scss',
 })
