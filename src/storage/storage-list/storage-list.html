@@ -1,1 +1,15 @@
-<p>storage-list works!</p>
+<h1>Storage Items</h1>
+<button class="app-mb-default" mat-button (click)="add()"><mat-icon>add</mat-icon>New</button>
+<div class="app-flex-col app-gap-default">
+  @for (item of items; track $index) {
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{ item.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ item.location }}</p>
+      <p>{{ item.date | date : 'dd.MM.yyyy' }}</p>
+    </mat-card-content>
+  </mat-card>
+  }
+</div>

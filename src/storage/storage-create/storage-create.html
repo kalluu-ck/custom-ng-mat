@@ -1,7 +1,12 @@
-<form class="app-flex-col app-gap-md" [formGroup]="form">
+<h1>Storage Item Tracking</h1>
+<form class="app-flex-col app-gap-md" [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-form-field>
-    <mat-label>Name</mat-label>
+    <mat-label>Item</mat-label>
     <input matInput type="text" [formControl]="controls.name" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Location</mat-label>
+    <input matInput type="text" [formControl]="controls.location" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Date</mat-label>
@@ -10,4 +15,8 @@
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+  <div class="app-flex-row app-content-end">
+    <button mat-button type="button" (click)="onCancelClick()">Cancel</button>
+    <button mat-button>Submit</button>
+  </div>
 </form>

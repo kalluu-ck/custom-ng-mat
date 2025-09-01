@@ -16,6 +16,10 @@ $xxl: 40px;
   flex-direction: column;
 }
 
+.app-content-end {
+  justify-content: end;
+}
+
 .app-gap-xs {
   gap: $xs;
 }
@@ -42,4 +46,12 @@ $xxl: 40px;
 
 .app-gap-xxl {
   gap: $xxl;
+}
+
+.app-p-xxl {
+  padding: $xxl;
+}
+
+.app-mb-default {
+  margin-bottom: $default;
 }
