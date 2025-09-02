@@ -15,11 +15,8 @@ class AppDateAdapter extends NativeDateAdapter implements OnDestroy {
 
   constructor() {
     super();
-    this.subs.push(
-      this.translate.onLangChange.subscribe(({ lang }) => {
-        this.setLocale(lang);
-      })
-    );
+    this.setLocale(this.translate.getCurrentLang());
+    this.subs.push(this.translate.onLangChange.subscribe((e) => this.setLocale(e.lang)));
   }
 
   public override parse(value: any, parseFormat?: any): Date | null {
@@ -51,10 +48,20 @@ class AppDateAdapter extends NativeDateAdapter implements OnDestroy {
     if (!date) {
       return '';
     }
-    const dd = date.getDate().toString().padStart(2, '0');
-    const mm = (date.getMonth() + 1).toString().padStart(2, '0');
-    const yyyy = date.getFullYear().toString();
-    return `${dd}.${mm}.${yyyy}`;
+    // We want to display the same format `dd.MM.yyyy` for all locales in the application
+    // Thus, we use 'de-CH' locale for all cases
+    const dtf = new Intl.DateTimeFormat('de-CH', { ...displayFormat, timeZone: 'utc' });
+    return this.nativeFormat(dtf, date);
+  }
+
+  // This function is exactly the same as the function _format of the parent class `NativeDateAdapter`
+  private nativeFormat(dtf: Intl.DateTimeFormat, date: Date) {
+    // Passing the year to the constructor causes year numbers <100 to be converted to 19xx.
+    // To work around this we use `setUTCFullYear` and `setUTCHours` instead.
+    const d = new Date();
+    d.setUTCFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+    d.setUTCHours(date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
+    return dtf.format(d);
   }
 
   public ngOnDestroy(): void {
@@ -70,9 +77,9 @@ const appDateFormat: MatDateFormats = Object.freeze({
   display: {
     dateInput: { year: 'numeric', month: '2-digit', day: '2-digit' },
     timeInput: { hour: '2-digit', minute: '2-digit' },
-    monthYearLabel: { year: 'numeric', month: 'short' },
-    dateA11yLabel: { year: 'numeric', month: 'long', day: '2-digit' },
-    monthYearA11yLabel: { year: 'numeric', month: 'long' },
+    monthYearLabel: { year: 'numeric', month: '2-digit' },
+    dateA11yLabel: { year: 'numeric', month: '2-digit', day: '2-digit' },
+    monthYearA11yLabel: { year: 'numeric', month: '2-digit' },
     timeOptionLabel: { hour: '2-digit', minute: '2-digit' },
   },
 });
