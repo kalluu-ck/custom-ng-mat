@@ -54,7 +54,7 @@ class AppDateAdapter extends NativeDateAdapter implements OnDestroy {
     return this.nativeFormat(dtf, date);
   }
 
-  // This function is exactly the same as the function _format of the parent class `NativeDateAdapter`
+  // This function is exactly the same as the function `_format` of the parent class `NativeDateAdapter`
   private nativeFormat(dtf: Intl.DateTimeFormat, date: Date) {
     // Passing the year to the constructor causes year numbers <100 to be converted to 19xx.
     // To work around this we use `setUTCFullYear` and `setUTCHours` instead.
