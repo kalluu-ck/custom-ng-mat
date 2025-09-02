@@ -1,0 +1,13 @@
+<mat-toolbar class="app-content-space-between">
+  <div>
+    <a matButton [routerLink]="['.']">{{ 'header.title' | translate }}</a>
+  </div>
+  <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>language</mat-icon>{{ currentLang$() }}
+  </button>
+  <mat-menu #menu="matMenu">
+    @for (item of langs; track $index) {
+    <button mat-menu-item (click)="changeLang(item)">{{ item }}</button>
+    }
+  </mat-menu>
+</mat-toolbar>

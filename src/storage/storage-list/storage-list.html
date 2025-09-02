@@ -1,5 +1,7 @@
-<h1>Storage Items</h1>
-<button class="app-mb-default" mat-button (click)="add()"><mat-icon>add</mat-icon>New</button>
+<div class="app-flex-row app-gap-default app-items-center">
+  <h1>{{ 'storage.list.title' | translate }}</h1>
+  <button mat-button (click)="add()"><mat-icon>add</mat-icon>New</button>
+</div>
 <div class="app-flex-col app-gap-default">
   @for (item of items; track $index) {
   <mat-card appearance="outlined">

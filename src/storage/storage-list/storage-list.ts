@@ -7,10 +7,11 @@ import { Router } from '@angular/router';
 import { APP_ROUTE_PATHS } from '../../app/app.routes';
 import { STORAGE_ROUTE_PATHS } from '../routes';
 import { StorageData } from '../storage-data';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-storage-list',
-  imports: [MatCardModule, MatButtonModule, MatIconModule, DatePipe],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, DatePipe, TranslatePipe],
   templateUrl: './storage-list.html',
   styleUrl: './storage-list.scss',
 })

@@ -1,13 +1,27 @@
-import { Injectable, Provider } from '@angular/core';
+import { inject, Injectable, OnDestroy, Provider } from '@angular/core';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
   MatDateFormats,
   NativeDateAdapter,
 } from '@angular/material/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Injectable()
-class AppDateAdapter extends NativeDateAdapter {
+class AppDateAdapter extends NativeDateAdapter implements OnDestroy {
+  private subs: Subscription[] = [];
+  private translate = inject(TranslateService);
+
+  constructor() {
+    super();
+    this.subs.push(
+      this.translate.onLangChange.subscribe(({ lang }) => {
+        this.setLocale(lang);
+      })
+    );
+  }
+
   public override parse(value: any, parseFormat?: any): Date | null {
     if (!value) {
       return null;
@@ -42,6 +56,10 @@ class AppDateAdapter extends NativeDateAdapter {
     const yyyy = date.getFullYear().toString();
     return `${dd}.${mm}.${yyyy}`;
   }
+
+  public ngOnDestroy(): void {
+    this.subs.forEach((x) => x.unsubscribe());
+  }
 }
 
 const appDateFormat: MatDateFormats = Object.freeze({
@@ -51,11 +69,11 @@ const appDateFormat: MatDateFormats = Object.freeze({
   },
   display: {
     dateInput: { year: 'numeric', month: '2-digit', day: '2-digit' },
-    timeInput: { hour: 'numeric', minute: 'numeric' },
+    timeInput: { hour: '2-digit', minute: '2-digit' },
     monthYearLabel: { year: 'numeric', month: 'short' },
     dateA11yLabel: { year: 'numeric', month: 'long', day: '2-digit' },
     monthYearA11yLabel: { year: 'numeric', month: 'long' },
-    timeOptionLabel: { hour: 'numeric', minute: 'numeric' },
+    timeOptionLabel: { hour: '2-digit', minute: '2-digit' },
   },
 });
 

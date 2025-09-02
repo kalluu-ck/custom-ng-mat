@@ -20,6 +20,14 @@ $xxl: 40px;
   justify-content: end;
 }
 
+.app-content-space-between {
+  justify-content: space-between;
+}
+
+.app-items-center {
+  align-items: center;
+}
+
 .app-gap-xs {
   gap: $xs;
 }
@@ -48,8 +56,8 @@ $xxl: 40px;
   gap: $xxl;
 }
 
-.app-p-xxl {
-  padding: $xxl;
+.app-p-default {
+  padding: $default;
 }
 
 .app-mb-default {
